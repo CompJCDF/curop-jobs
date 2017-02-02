@@ -28,7 +28,7 @@ if totalNumberOfAds % 40 != 0:
     pages += 1
 
 for url in urls:
-    for page in range(1, math.floor(pages) + 1):
+    for page in range(1, int(pages) + 1):
         newUrl = url + str(page) + "/"
         html = get(newUrl).text
         bsObj = BeautifulSoup(html, "html.parser")
