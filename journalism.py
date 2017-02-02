@@ -1,24 +1,19 @@
 import json
 import time
 import os.path
+
 from requests import get
+from datetime import datetime
 from bs4 import BeautifulSoup
 
 # create set to get only the unique links
 htfpLinks = set()
 
-if os.path.isfile('data.json'):
-    # read the json file if it's empty we create empty list
-    with open('data.json') as inFile:
-        try:
-            data = json.load(inFile)
-        except ValueError:
-            data = []
-else:
-    data = []
+localtime = datetime.now().strftime("%Y-%b-%d--%H-%M-%S")
+print(localtime)
 
-dataSize = len(data)
-jobNumber = dataSize
+
+data = []
 
 # the first url to the job links
 urls = ["https://www.journalism.co.uk/media-reporter-jobs/s64/"]
@@ -34,6 +29,8 @@ for url in urls:
         jobLink = jobTitle.find("a")
         htfpLinks.add(jobLink.get('href'))
 
+print(htfpLinks.size())
+
 # download links data
 for row, link in enumerate(htfpLinks):
     #checks if this link exist
@@ -45,14 +42,12 @@ for row, link in enumerate(htfpLinks):
     if flag == True:
         break;
 
-    row = row + dataSize
-
     #if the link does not exist we will add it to the list
     data.append({'link':link})
 
     #sleep to not overload the servers and printing the current page processed
     time.sleep(1)
-    print row
+    print(row)
 
     # creating the json object
     html = get(data[row]["link"]).text
@@ -82,8 +77,6 @@ for row, link in enumerate(htfpLinks):
     data[row]["Industries"] = []
     data[row]["Sectors"] = []
     data[row]["Disciplines"] = []
-    data[row]["id"] = jobNumber
-    jobNumber += 1
 
-with open('data.json', 'w') as outfile:
+with open('journalism_%s.json' % (localtime), 'w') as outfile:
     json.dump(data, outfile, sort_keys=True, indent=4)
