@@ -42,6 +42,8 @@ for url in urls:
             jobLink = jobTitle.find('a')
             htfpLinks.add(jobLink.get('href'))
 
+print(htfpLinks)
+
 for row1, link in enumerate(htfpLinks):
     #checks if this link exist
     flag = False
