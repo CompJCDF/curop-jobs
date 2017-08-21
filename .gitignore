@@ -1,0 +1,6 @@
+
+# don't want source data in the repository
+data/*
+
+# python stuff
+*.pyc
