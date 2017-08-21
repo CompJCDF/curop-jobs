@@ -29,7 +29,7 @@ for url in urls:
         jobLink = jobTitle.find("a")
         htfpLinks.add(jobLink.get('href'))
 
-print(htfpLinks.size())
+print(htfpLinks)
 
 # download links data
 for row, link in enumerate(htfpLinks):

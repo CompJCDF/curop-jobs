@@ -28,6 +28,8 @@ for url in urls:
     for link in jobLinks:
         htfpLinks.add(link.get('href'))
 
+print(htfpLinks)
+
 for row, link in enumerate(htfpLinks):
     #checks if this link exist
     flag = False
