@@ -2,5 +2,8 @@
 # don't want source data in the repository
 data/*
 
+# json output may include proprietary data
+output/json/*
+
 # python stuff
 *.pyc
