@@ -7,3 +7,4 @@ output/json/*
 
 # python stuff
 *.pyc
+.ipynb_checkpoints/
